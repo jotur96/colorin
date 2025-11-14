@@ -2,30 +2,30 @@ services:
   api:
     build: .
     ports:
-      - "8000:8000"
+      - "9137:9137"
     volumes:
       - .:/app
       - ./data:/app/data
     environment:
       - DATABASE_PATH=/app/data/colorin.db
-      - PORT=8000
+      - PORT=9137
     working_dir: /app
     restart: unless-stopped
     command: >
-      sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 9137 --reload"
 
   frontend:
     build:
       context: ./frontend
     ports:
-      - "5173:5173"
+      - "61234:61234"
     environment:
-      - VITE_API_URL=http://localhost:8000
+      - VITE_API_URL=http://localhost:9137
     volumes:
       - ./frontend:/app
       - frontend_node_modules:/app/node_modules
     command: >
-      sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+      sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 61234"
     depends_on:
       - api
 
