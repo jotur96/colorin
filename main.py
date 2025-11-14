@@ -1,9 +1,12 @@
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import date, datetime, timedelta
+from pathlib import Path
 import database
 import models
 import schemas
@@ -18,6 +21,20 @@ app = FastAPI(
     description="Sistema de gestión de eventos y asignación de profesores",
     version="1.0.0"
 )
+
+FRONTEND_DIST_PATH = Path(__file__).parent / "frontend_dist"
+FRONTEND_INDEX_FILE = FRONTEND_DIST_PATH / "index.html"
+
+if FRONTEND_DIST_PATH.exists():
+    assets_dir = FRONTEND_DIST_PATH / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+
+def _serve_frontend_index():
+    if FRONTEND_INDEX_FILE.exists():
+        return FileResponse(FRONTEND_INDEX_FILE)
+    return None
 
 # Configurar CORS para permitir acceso desde cualquier origen (incluye celular)
 app.add_middleware(
@@ -136,6 +153,9 @@ def create_user(usuario: schemas.UsuarioCreate, db: Session = Depends(get_db)):
 
 @app.get("/")
 def root():
+    index_response = _serve_frontend_index()
+    if index_response:
+        return index_response
     return {
         "message": "API de Colorin - Gestión de Eventos",
         "version": "1.0.0"
@@ -1092,4 +1112,16 @@ def toggle_tarea_evento(
     db.commit()
     db.refresh(db_tarea)
     return db_tarea
+
+
+@app.get("/{full_path:path}", include_in_schema=False)
+def serve_frontend_app(full_path: str):
+    if FRONTEND_DIST_PATH.exists():
+        requested = FRONTEND_DIST_PATH / full_path
+        if requested.is_file():
+            return FileResponse(requested)
+        index_response = _serve_frontend_index()
+        if index_response:
+            return index_response
+    raise HTTPException(status_code=404, detail="Recurso no encontrado")
 

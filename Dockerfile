@@ -1,22 +1,28 @@
-FROM python:3.11-slim
+FROM node:20-alpine AS frontend-builder
+WORKDIR /frontend
+
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ .
+RUN npm run build
+
+FROM python:3.11-slim AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=8000
 
 WORKDIR /app
 
-# Copiar archivos de dependencias
 COPY requirements.txt .
-
-# Instalar dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar código de la aplicación
 COPY . .
+COPY --from=frontend-builder /frontend/dist ./frontend_dist
 
-# Crear directorio para la base de datos con permisos
 RUN mkdir -p /app/data && chmod 777 /app/data
 
-# Exponer puerto
 EXPOSE 8000
 
-# Comando para iniciar la aplicación
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
 
