@@ -1,0 +1,891 @@
+.eventos-page {
+  animation: fadeIn 0.3s;
+}
+
+.eventos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.evento-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  position: relative;
+}
+
+.evento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(212, 197, 185, 0.2);
+  border: 2px solid #d4c5b9;
+}
+
+.evento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.evento-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.evento-fecha {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.evento-ubicacion {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.evento-actividad {
+  color: #d4a8a8;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.actividades-checklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #fff8e6 0%, #ffffff 100%);
+  border-radius: 12px;
+  border: 3px solid #d4c5b9;
+  border-left: 5px solid #d4a8a8;
+  margin-top: 0.75rem;
+  box-shadow: 0 4px 12px rgba(212, 197, 185, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.actividades-checklist::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #d4a8a8 0%, #d4c5b9 50%, #e8ddd4 100%);
+}
+
+.actividad-checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: white;
+  border: 2px solid #e0e0e0;
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+}
+
+.actividad-checkbox-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #d4a8a8 0%, #d4c5b9 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.actividad-checkbox-label:hover {
+  background: linear-gradient(135deg, #fff8e6 0%, #ffe4b5 100%);
+  border-color: #d4c5b9;
+  transform: translateX(4px);
+  box-shadow: 0 3px 10px rgba(212, 197, 185, 0.2);
+}
+
+.actividad-checkbox-label:hover::before {
+  transform: scaleY(1);
+}
+
+.actividad-checkbox-label input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #d4c5b9;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  align-self: center;
+}
+
+.actividad-checkbox-label input[type="checkbox"]:checked {
+  accent-color: #d4a8a8;
+  transform: scale(1.1);
+}
+
+.actividad-checkbox-label:has(input[type="checkbox"]:checked) {
+  background: linear-gradient(135deg, #ffe0e0 0%, #fff8e6 100%);
+  border-color: #d4a8a8;
+  border-left-width: 4px;
+  border-left-color: #d4a8a8;
+  box-shadow: 0 3px 12px rgba(212, 168, 168, 0.25);
+  font-weight: 600;
+}
+
+.actividad-checkbox-label:has(input[type="checkbox"]:checked)::before {
+  transform: scaleY(1);
+  width: 5px;
+  background: linear-gradient(135deg, #d4a8a8 0%, #d4c5b9 100%);
+}
+
+.actividad-checkbox-label span {
+  font-size: 0.95rem;
+  color: #333;
+  user-select: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.actividad-checkbox-label:has(input[type="checkbox"]:checked) span {
+  color: #d4a8a8;
+  font-weight: 600;
+}
+
+.actividad-checkbox-label:hover span {
+  color: #d4a8a8;
+}
+
+.actividad-personalizada-input {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fff8e6 0%, #ffe4b5 100%);
+  border-radius: 10px;
+  border: 2px solid #d4c5b9;
+  border-left: 4px solid #d4a8a8;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.actividad-personalizada-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.input-actividad-personalizada {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #d4c5b9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.input-actividad-personalizada:focus {
+  outline: none;
+  border-color: #d4a8a8;
+  box-shadow: 0 0 0 3px rgba(212, 168, 168, 0.1);
+}
+
+@media (max-width: 768px) {
+  .actividades-checklist {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  .actividad-checkbox-label {
+    padding: 0.75rem;
+  }
+}
+
+.evento-horarios {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: #f0f7ff;
+  border-radius: 8px;
+  border-left: 3px solid #4ecdc4;
+}
+
+.evento-horario {
+  color: #555;
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.evento-notas {
+  color: #555;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #fff8e6;
+  border-radius: 8px;
+  border-left: 4px solid #d4c5b9;
+}
+
+.evento-asignaciones {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #e7f3ff;
+  border-radius: 8px;
+  color: #004085;
+}
+
+.evento-asignaciones strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.profesores-nombres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.profesor-nombre-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: white;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(78, 205, 196, 0.2);
+  position: relative;
+}
+
+.btn-eliminar-profesor {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0;
+  margin-left: 0.25rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-eliminar-profesor:hover {
+  background: rgba(212, 168, 168, 0.9);
+  transform: scale(1.1);
+}
+
+.btn-eliminar-profesor:active {
+  transform: scale(0.95);
+}
+
+.badge-primary {
+  background: linear-gradient(135deg, #d4c5b9 0%, #c9b8a8 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(212, 197, 185, 0.2);
+}
+
+.evento-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #d4c5b9;
+  box-shadow: 0 0 0 3px rgba(212, 197, 185, 0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-large {
+  max-width: 700px;
+}
+
+.modal-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.modal h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.modal p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #d4c5b9;
+  box-shadow: 0 0 0 3px rgba(212, 197, 185, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.profesores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.profesor-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.profesor-item:hover:not(.ya-asignado) {
+  border-color: #d4c5b9;
+  background: #fff8e6;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(212, 197, 185, 0.15);
+}
+
+.profesor-item.seleccionado {
+  border-color: #d4c5b9;
+  background: #fff8e6;
+  box-shadow: 0 2px 8px rgba(212, 197, 185, 0.2);
+}
+
+.profesor-item.ya-asignado {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+
+.profesor-item.muy-recomendado {
+  border-left: 4px solid #4ecdc4;
+  background: #f0fff4;
+}
+
+.profesor-checkbox {
+  flex-shrink: 0;
+}
+
+.profesor-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.check-disabled {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.profesor-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profesor-nombre {
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-recomendado {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(68, 160, 141, 0.2);
+}
+
+.profesor-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.eventos-count {
+  color: #666;
+}
+
+.sin-eventos {
+  color: #4ecdc4;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.seleccion-info {
+  padding: 1rem;
+  background: linear-gradient(135deg, #fff8e6 0%, #ffe4b5 100%);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #c56c00;
+  font-weight: 600;
+  border: 2px solid #d4c5b9;
+}
+
+.loading-modal {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.modal-header-detalle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.modal-header-detalle h3 {
+  margin: 0;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.evento-detalle-info {
+  margin-bottom: 2rem;
+}
+
+.detalle-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.detalle-item.detalle-notas {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detalle-label {
+  font-weight: 600;
+  color: #333;
+  min-width: 100px;
+}
+
+.detalle-value {
+  color: #666;
+  flex: 1;
+}
+
+.detalle-value p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.profesores-asignados-section {
+  margin-bottom: 2rem;
+}
+
+.profesores-asignados-section h4 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d4c5b9;
+}
+
+.sin-profesores {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+}
+
+.sin-profesores p {
+  margin-bottom: 1rem;
+}
+
+.profesores-asignados-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profesor-asignado-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.profesor-asignado-card:hover {
+  border-color: #d4c5b9;
+  background: #fff8e6;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(212, 197, 185, 0.15);
+}
+
+.profesor-asignado-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profesor-asignado-nombre {
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.badge-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.badge-status.activo {
+  background: linear-gradient(135deg, #d4f1f4 0%, #a8e6cf 100%);
+  color: #0d7377;
+  font-weight: 600;
+}
+
+.badge-status.inactivo {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.profesor-rol {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .evento-actions {
+    flex-direction: column;
+  }
+
+  .evento-actions .btn {
+    width: 100%;
+  }
+
+  .modal {
+    padding: 1.5rem;
+  }
+
+  .modal-large {
+    max-width: 95%;
+  }
+
+  .profesor-item {
+    padding: 0.75rem;
+  }
+
+  .profesor-nombre {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.tareas-evento-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #d4c5b9;
+}
+
+.tareas-evento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tareas-evento-header h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.form-tarea-evento {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #fff8e6;
+  border-radius: 8px;
+  border: 2px solid #d4c5b9;
+}
+
+.input-tarea-evento {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #d4c5b9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-tarea-evento:focus {
+  outline: none;
+  border-color: #d4a8a8;
+  box-shadow: 0 0 0 3px rgba(212, 168, 168, 0.1);
+}
+
+.loading-tareas {
+  text-align: center;
+  padding: 1rem;
+  color: #666;
+}
+
+.sin-tareas {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+}
+
+.tareas-evento-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tarea-evento-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #d4c5b9;
+}
+
+.tarea-evento-item:hover {
+  border-color: #d4c5b9;
+  background: #fff8e6;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(212, 197, 185, 0.15);
+}
+
+.tarea-evento-item.completada {
+  opacity: 0.75;
+  background: #f0fff4;
+  border-left-color: #4ecdc4;
+}
+
+.tarea-evento-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.tarea-evento-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #d4c5b9;
+}
+
+.tarea-evento-descripcion {
+  flex: 1;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tarea-evento-descripcion.tachado {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.tarea-completada-fecha {
+  font-size: 0.85rem;
+  color: #4ecdc4;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tareas-completadas-divider {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.tareas-completadas-divider h5 {
+  margin: 0 0 1rem 0;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .tareas-evento-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-tarea-evento {
+    flex-direction: column;
+  }
+
+  .input-tarea-evento {
+    width: 100%;
+  }
+
+  .tarea-evento-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .tarea-evento-content {
+    width: 100%;
+  }
+}
+
