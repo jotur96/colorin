@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const resolvedDefaultApiUrl =
+  typeof window !== 'undefined' && window.location.hostname.includes('manco.app')
+    ? 'https://api-colorin.manco.app'
+    : 'http://localhost:8000';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || resolvedDefaultApiUrl;
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -127,4 +132,3 @@ export const tareasEventoAPI = {
 };
 
 export default apiClient;
-

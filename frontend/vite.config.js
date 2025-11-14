@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    allowedHosts: ['colorin.manco.app'],
+    allowedHosts: ['colorin.manco.app', 'api-colorin.manco.app'],
   },
 })
